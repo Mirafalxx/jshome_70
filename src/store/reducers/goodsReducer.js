@@ -6,12 +6,18 @@ import {
 
 const initialState = {
   goods: [],
+  loading: false,
+  error: false,
 };
 
 const goodsReducers = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_GOODS_REQUEST:
+      return { ...state, loading: true };
     case FETCH_GOODS_SUCCESS:
-      return { ...state, goods: action.goods };
+      return { ...state, goods: action.goods, loading: false };
+    case FETCH_GOODS_FAILURE:
+      return { ...state, loading: false };
   }
   return state;
 };
